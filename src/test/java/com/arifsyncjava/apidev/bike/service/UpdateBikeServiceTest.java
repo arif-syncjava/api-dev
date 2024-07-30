@@ -4,49 +4,50 @@ import com.arifsyncjava.apidev.bike.model.Bike;
 import com.arifsyncjava.apidev.bike.model.BikeDTO;
 import com.arifsyncjava.apidev.bike.repository.BikeRepository;
 import com.arifsyncjava.apidev.exceptions.ProductNotFoundException;
-import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class GetBikeServiceTest {
+public class UpdateBikeServiceTest {
 
     @Mock
     private BikeRepository bikeRepository;
 
     @InjectMocks
-    private GetBikeService getBikeService;
+    private UpdateBikeService updateBikeService;
 
     @Test
-    public void getGetBikeService_returnsSuccess () {
-        Bike bike = new Bike();
-        bike.setBrand("pulsar");
-        bike.setBikeModel("123abc");
-        bike.setColor("red");
-        bike.setPrice("25k");
+    public void updateBikeService_returnsSuccess() {
+        Bike bikeRequest = new Bike();
+        bikeRequest.setBrand("abc");
+        bikeRequest.setBikeModel("xyz");
 
-        when(bikeRepository.findByBikeModel("123abc")).thenReturn(Optional.of(bike));
+        when(bikeRepository.findByBikeModel("xyz")).thenReturn(Optional.of(bikeRequest));
+        bikeRequest.setBrand("newBrand");
+        when(bikeRepository.save(any(Bike.class))).thenReturn(bikeRequest);
 
-        ResponseEntity<BikeDTO> response = getBikeService.execute("123abc");
+        ResponseEntity<BikeDTO> response = updateBikeService.execute(bikeRequest);
 
-        assertEquals(HttpStatus.OK,response.getStatusCode());
+        Assertions.assertEquals("newBrand", response.getBody().getBrand());
+
 
     }
 
+
     @Test
-    public void getGetBikeService_returnsException () {
+    public void updateBikeService_returnsException() {
         Bike bike = new Bike();
         String model = "123abc";
         bike.setBrand("pulsar");
@@ -57,12 +58,17 @@ public class GetBikeServiceTest {
         when(bikeRepository.findByBikeModel(model)).thenReturn(Optional.empty());
 
         ProductNotFoundException exception = assertThrows(ProductNotFoundException.class,
-        ()->getBikeService.execute(model));
+                ()->updateBikeService.execute(bike));
 
         assertEquals("bike model not available", exception.getMessage());
 
 
     }
+
+
+
+
+
 
 
 

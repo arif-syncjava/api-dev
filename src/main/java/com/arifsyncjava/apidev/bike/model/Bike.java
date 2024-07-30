@@ -22,6 +22,8 @@ public class Bike {
         return id;
     }
 
+
+
     public String getBrand() {
         return brand;
     }
@@ -36,6 +38,10 @@ public class Bike {
 
     public String getPrice() {
         return price;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public void setBrand(String brand) {
