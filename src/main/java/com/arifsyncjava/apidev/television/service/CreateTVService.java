@@ -1,7 +1,6 @@
 package com.arifsyncjava.apidev.television.service;
 
 import com.arifsyncjava.apidev.Command;
-import com.arifsyncjava.apidev.television.Validator;
 import com.arifsyncjava.apidev.television.model.HttpResponse;
 import com.arifsyncjava.apidev.television.model.Television;
 import com.arifsyncjava.apidev.television.model.TelevisionDTO;

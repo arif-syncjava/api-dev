@@ -1,4 +1,4 @@
-package com.arifsyncjava.apidev.television;
+package com.arifsyncjava.apidev.television.service;
 
 import com.arifsyncjava.apidev.exceptions.InvalidException;
 import com.arifsyncjava.apidev.television.model.Television;
