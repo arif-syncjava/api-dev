@@ -1,5 +1,6 @@
 package com.arifsyncjava.apidev.exception;
 
+import com.arifsyncjava.apidev.exceptions.ApiException;
 import com.arifsyncjava.apidev.exceptions.ProductNotFoundException;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
@@ -14,10 +15,19 @@ public class ExceptionController {
     public ResponseEntity<ExceptionResponse> handleProductNotFoundException (
             ProductNotFoundException exception) {
         return ResponseEntity
-                .status(HttpStatus.NOT_FOUND)
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(new ExceptionResponse(
-                        HttpStatus.NOT_FOUND.value(),
-                        HttpStatus.NOT_FOUND.getReasonPhrase(),
+                        HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                        HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase(),
+                        exception.getMessage()));
+    }
+    @ExceptionHandler (ApiException.class)
+    public ResponseEntity<ExceptionResponse> handleApiException (ApiException exception) {
+        return ResponseEntity
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(new ExceptionResponse(
+                        HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                        HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase(),
                         exception.getMessage()));
     }
 

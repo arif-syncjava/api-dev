@@ -1,21 +1,10 @@
-package com.arifsyncjava.apidev.television.model;
+package com.arifsyncjava.apidev.television.request;
 
-import com.arifsyncjava.apidev.television.request.CreateRequest;
-
-public class Television {
+public class CreateRequest {
     private String brand;
     private String model;
     private String size;
     private String price;
-
-    public Television () {};
-
-    public Television(CreateRequest request) {
-        this.brand = request.getBrand();
-        this.model = request.getModel();
-        this.size = request.getSize();
-        this.price = request.getPrice();
-    }
 
     public String getBrand() {
         return brand;
