@@ -1,4 +1,4 @@
-package com.arifsyncjava.apidev.television.request;
+package com.arifsyncjava.apidev.television.model;
 
 public class CreateRequest {
     private String brand;

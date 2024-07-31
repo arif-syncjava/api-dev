@@ -1,7 +1,5 @@
 package com.arifsyncjava.apidev.television.model;
 
-import com.arifsyncjava.apidev.television.request.CreateRequest;
-
 public class Television {
     private String brand;
     private String model;

@@ -3,7 +3,6 @@ package com.arifsyncjava.apidev.television.service;
 import com.arifsyncjava.apidev.television.model.HttpResponse;
 import com.arifsyncjava.apidev.television.model.Television;
 import com.arifsyncjava.apidev.television.repository.TVRepository;
-import com.arifsyncjava.apidev.television.model.CreateRequest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,42 +12,32 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.util.Optional;
+
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class CreateTVServiceTest {
+public class DeleteTVServiceTest {
 
     @Mock
     private TVRepository tvRepository;
-    @Mock
-    private ValidatorService validatorService;
 
     @InjectMocks
-    private CreateTVService createTVService;
+    private DeleteTVService deleteTVService;
 
     @Test
-    public void createTVService_returnSuccess() {
-        CreateRequest request = new CreateRequest();
-        request.setBrand("a");
-        request.setModel("xyz");
-        request.setSize("30cm");
-        request.setPrice("250tk");
-
+    public void deleteTVService_returnsSuccess () {
         Television tv = new Television();
+        String model = "b";
+        tv.setModel(model);
+        when(tvRepository.getTelevisionByModel(model)).thenReturn(Optional.of(tv));
 
+        ResponseEntity<HttpResponse> response = deleteTVService.execute(model);
 
-        when(validatorService.execute(request)).thenReturn(tv);
-        when(tvRepository.saveTelevision(tv)).thenReturn(tv);
+        Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
 
-        ResponseEntity<HttpResponse> response = createTVService.execute(request);
-
-        Assertions.assertEquals(HttpStatus.OK,response.getStatusCode());
 
     }
-
-
-
-
 
 
 

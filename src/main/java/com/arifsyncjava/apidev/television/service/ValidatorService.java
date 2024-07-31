@@ -2,14 +2,14 @@ package com.arifsyncjava.apidev.television.service;
 
 import com.arifsyncjava.apidev.exceptions.InvalidException;
 import com.arifsyncjava.apidev.television.model.Television;
-import com.arifsyncjava.apidev.television.request.CreateRequest;
+import com.arifsyncjava.apidev.television.model.CreateRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 @Component
-public class Validator {
+public class ValidatorService {
 
-    public static Television execute(CreateRequest request) {
+    public  Television execute(CreateRequest request) {
 
         if (!StringUtils.hasText(request.getBrand())) {
             throw new InvalidException("valid brand required");
@@ -25,7 +25,6 @@ public class Validator {
         }
 
         return new Television(request);
-
 
     }
 
