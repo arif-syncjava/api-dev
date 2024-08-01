@@ -1,7 +1,7 @@
 package com.arifsyncjava.apidev.bike.service;
 
 import com.arifsyncjava.apidev.bike.model.Bike;
-import com.arifsyncjava.apidev.bike.model.BikeDTO;
+import com.arifsyncjava.apidev.bike.dto.BikeDTO;
 import com.arifsyncjava.apidev.bike.repository.BikeRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

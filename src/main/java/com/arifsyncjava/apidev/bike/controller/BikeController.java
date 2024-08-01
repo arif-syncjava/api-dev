@@ -1,7 +1,7 @@
 package com.arifsyncjava.apidev.bike.controller;
 
 import com.arifsyncjava.apidev.bike.model.Bike;
-import com.arifsyncjava.apidev.bike.model.BikeDTO;
+import com.arifsyncjava.apidev.bike.dto.BikeDTO;
 import com.arifsyncjava.apidev.bike.service.CreateBikeService;
 import com.arifsyncjava.apidev.bike.service.DeleteBikeService;
 import com.arifsyncjava.apidev.bike.service.GetBikeService;

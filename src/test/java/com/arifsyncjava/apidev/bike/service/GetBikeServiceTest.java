@@ -1,16 +1,14 @@
 package com.arifsyncjava.apidev.bike.service;
 
 import com.arifsyncjava.apidev.bike.model.Bike;
-import com.arifsyncjava.apidev.bike.model.BikeDTO;
+import com.arifsyncjava.apidev.bike.dto.BikeDTO;
 import com.arifsyncjava.apidev.bike.repository.BikeRepository;
 import com.arifsyncjava.apidev.exceptions.ProductNotFoundException;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 

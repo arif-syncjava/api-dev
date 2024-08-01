@@ -3,6 +3,7 @@ package com.arifsyncjava.apidev.television.repository;
 import com.arifsyncjava.apidev.exceptions.ApiException;
 import com.arifsyncjava.apidev.exceptions.ProductNotFoundException;
 import com.arifsyncjava.apidev.television.model.Television;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.RowCountCallbackHandler;
 import org.springframework.jdbc.core.simple.JdbcClient;
@@ -15,10 +16,10 @@ import java.util.Optional;
 @Repository
 public class TVRepositoryImpl implements TVRepository{
 
-    private final JdbcClient jdbc;
+    private final JdbcClient jdbcClient;
 
-    public TVRepositoryImpl(JdbcClient jdbc) {
-        this.jdbc = jdbc;
+    public TVRepositoryImpl(@Qualifier ("televisionJdbcClient") JdbcClient jdbcClient) {
+        this.jdbcClient = jdbcClient;
     }
 
     private final String TV_READ_QUERY = "SELECT brand,model,size,price From tvs WHERE model = :model ";
@@ -27,7 +28,7 @@ public class TVRepositoryImpl implements TVRepository{
 
     @Override
     public Optional<Television> getTelevisionByModel(String model) {
-        return jdbc.sql(TV_READ_QUERY)
+        return jdbcClient.sql(TV_READ_QUERY)
                 .param("model",model)
                 .query(Television.class).optional();
     }
@@ -40,14 +41,14 @@ public class TVRepositoryImpl implements TVRepository{
         }
 
         try {
-            jdbc.sql(TV_SAVE_QUERY)
+            jdbcClient.sql(TV_SAVE_QUERY)
                     .param("brand",television.getBrand())
                     .param("model",television.getModel())
                     .param("price",television.getPrice())
                     .param("size",television.getSize())
                     .update();
 
-            return jdbc.sql(TV_READ_QUERY)
+            return jdbcClient.sql(TV_READ_QUERY)
                     .param("model",television.getModel())
                     .query(Television.class).single();
 
@@ -65,7 +66,7 @@ public class TVRepositoryImpl implements TVRepository{
     public Television updateTelevision(Television television) {
 
         try {
-            jdbc.sql(TV_UPDATE_QUERY)
+            jdbcClient.sql(TV_UPDATE_QUERY)
 
                     .param("brand", television.getBrand())
                     .param("model", television.getModel())
@@ -73,7 +74,7 @@ public class TVRepositoryImpl implements TVRepository{
                     .param("size", television.getSize())
                     .update();
 
-            return jdbc.sql(TV_READ_QUERY)
+            return jdbcClient.sql(TV_READ_QUERY)
                     .param("model", television.getModel())
                     .query(Television.class).single();
 
@@ -86,7 +87,7 @@ public class TVRepositoryImpl implements TVRepository{
 
     @Override
     public void deleteTelevision(String model) {
-          int row =   jdbc.sql("DELETE FROM tvs WHERE model = :model")
+          int row =   jdbcClient.sql("DELETE FROM tvs WHERE model = :model")
                     .param("model", model)
                     .update();
 
@@ -100,7 +101,7 @@ public class TVRepositoryImpl implements TVRepository{
 
     private int countModel(String model) {
         RowCountCallbackHandler countCallbackHandler = new RowCountCallbackHandler();
-        jdbc.sql("SELECT model FROM tvs WHERE model =:model")
+        jdbcClient.sql("SELECT model FROM tvs WHERE model =:model")
                 .param("model", model)
                 .query(countCallbackHandler);
         return countCallbackHandler.getRowCount();

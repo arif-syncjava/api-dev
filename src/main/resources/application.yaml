@@ -1,16 +1,15 @@
-spring:
-      datasource:
+bike:
+      database:
             url: jdbc:postgresql://localhost:5432/bikedb
             username: postgres
             password: 1234
-      jpa:
-            generate-ddl: true
-            show-sql: true
-            properties:
-                  hibernate:
-                        format_sql: true
-            hibernate:
-                  ddl-auto: update
+
+
+television:
+      database:
+            url: jdbc:postgresql://localhost:5432/televisiondb
+            username: postgres
+            password: 1234
 
 
 

@@ -2,7 +2,7 @@ package com.arifsyncjava.apidev.bike.service;
 
 import com.arifsyncjava.apidev.Command;
 import com.arifsyncjava.apidev.bike.model.Bike;
-import com.arifsyncjava.apidev.bike.model.BikeDTO;
+import com.arifsyncjava.apidev.bike.dto.BikeDTO;
 import com.arifsyncjava.apidev.bike.repository.BikeRepository;
 import com.arifsyncjava.apidev.exceptions.ProductNotFoundException;
 import org.springframework.http.ResponseEntity;

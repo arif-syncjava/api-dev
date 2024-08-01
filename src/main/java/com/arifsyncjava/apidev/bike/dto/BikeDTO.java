@@ -1,4 +1,6 @@
-package com.arifsyncjava.apidev.bike.model;
+package com.arifsyncjava.apidev.bike.dto;
+
+import com.arifsyncjava.apidev.bike.model.Bike;
 
 public class BikeDTO {
     private String brand;
