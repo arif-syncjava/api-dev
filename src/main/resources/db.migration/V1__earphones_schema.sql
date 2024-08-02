@@ -1,5 +1,4 @@
-CREATE TABLE earphones(
+CREATE TABLE earphones_V1(
     id SERIAL PRIMARY KEY,
-    name VARCHAR NOT NULL,
-    price  VARCHAR NOT NULL
+    name VARCHAR NOT NULL
 );

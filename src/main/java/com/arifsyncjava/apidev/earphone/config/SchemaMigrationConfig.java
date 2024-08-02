@@ -31,6 +31,8 @@ public class SchemaMigrationConfig {
         Flyway flyway = Flyway.configure()
                 .dataSource(earPhoneDataSource)
                 .locations("classpath:/db.migration")
+                .baselineOnMigrate(true)
+               .validateOnMigrate(true)
                 .load();
 
         flyway.migrate();

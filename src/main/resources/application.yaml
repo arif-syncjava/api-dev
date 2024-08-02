@@ -13,8 +13,15 @@ television:
 
 earphone:
       database:
-            url: jdbc:postgresql://localhost:5432/earphone
+            url: jdbc:postgresql://localhost:5432/earphonedb
             username: postgres
             password: 1234
+
+pendrive:
+      database:
+            url: jdbc:postgresql://localhost:5432/earphonedb
+            username: postgres
+            password: 1234
+
 
 
