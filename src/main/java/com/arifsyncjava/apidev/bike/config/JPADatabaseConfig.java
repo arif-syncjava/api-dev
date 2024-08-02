@@ -1,32 +1,33 @@
-package com.arifsyncjava.apidev.bike;
+package com.arifsyncjava.apidev.bike.config;
 
 import com.zaxxer.hikari.HikariDataSource;
 import jakarta.persistence.EntityManagerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
+import org.springframework.boot.autoconfigure.orm.jpa.JpaProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
-import org.springframework.orm.jpa.LocalEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 import java.util.Collections;
-import java.util.Map;
 
-@Configuration
+@EnableTransactionManagement
+
 @EnableJpaRepositories (
         basePackages = "com.arifsyncjava.apidev.bike.repository",
         entityManagerFactoryRef = "bikeEntityManagerFactory",
         transactionManagerRef = "bikeTransactionManager"
 )
-@EnableTransactionManagement
+@Configuration
 public class JPADatabaseConfig {
 
 
@@ -48,7 +49,9 @@ public class JPADatabaseConfig {
 
     @Bean
     EntityManagerFactoryBuilder  entityManagerFactoryBuilder () {
-        return new EntityManagerFactoryBuilder(new HibernateJpaVendorAdapter(),
+        HibernateJpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
+        jpaVendorAdapter.setGenerateDdl(true);
+        return new EntityManagerFactoryBuilder(jpaVendorAdapter,
                 Collections.emptyMap(), null);
     }
 
@@ -59,11 +62,10 @@ public class JPADatabaseConfig {
            EntityManagerFactoryBuilder builder,
             @Qualifier ("bikeDataSource") DataSource bikeDataSource ) {
 
-
-
         return builder.dataSource(bikeDataSource)
                 .packages("com.arifsyncjava.apidev.bike.model")
                 .persistenceUnit("bike")
+
                 .build();
     }
 

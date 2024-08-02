@@ -1,9 +1,9 @@
+
 bike:
       database:
             url: jdbc:postgresql://localhost:5432/bikedb
             username: postgres
             password: 1234
-
 
 television:
       database:
@@ -11,6 +11,10 @@ television:
             username: postgres
             password: 1234
 
-
+earphone:
+      database:
+            url: jdbc:postgresql://localhost:5432/earphone
+            username: postgres
+            password: 1234
 
 
