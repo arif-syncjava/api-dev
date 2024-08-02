@@ -60,7 +60,7 @@ public class DataSourceConfig {
     }
 
     @Bean
-    NamedParameterJdbcTemplate jdbcTemplate (
+    NamedParameterJdbcTemplate bikeJdbcTemplate (
             @Qualifier ("penDriveDataSourceProperties")  DataSource penDriveDataSource ) {
         return new NamedParameterJdbcTemplate (penDriveDataSource);
     }

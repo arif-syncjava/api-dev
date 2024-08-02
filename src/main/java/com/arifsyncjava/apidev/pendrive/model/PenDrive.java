@@ -1,9 +1,18 @@
 package com.arifsyncjava.apidev.pendrive.model;
 
 public class PenDrive {
+    private String productId;
     private String brand;
     private String storage;
     private String price;
+
+    public String getProductId() {
+        return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
+    }
 
     public String getBrand() {
         return brand;
