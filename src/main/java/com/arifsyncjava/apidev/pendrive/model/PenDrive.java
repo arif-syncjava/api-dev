@@ -1,17 +1,24 @@
 package com.arifsyncjava.apidev.pendrive.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table (name = "pendrives")
 public class PenDrive {
-    private String productId;
+    @Id
+    private String id;
     private String brand;
     private String storage;
     private String price;
 
-    public String getProductId() {
-        return productId;
+    public String getId() {
+        return id;
     }
 
-    public void setProductId(String productId) {
-        this.productId = productId;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getBrand() {

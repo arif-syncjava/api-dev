@@ -1,4 +1,6 @@
-CREATE TABLE earphones_V1(
-    id SERIAL PRIMARY KEY,
-    name VARCHAR NOT NULL
-);
+CREATE TABLE earphones(
+    id BIGSERIAL PRIMARY KEY,
+    product_id VARCHAR NOT NULL,
+    model  VARCHAR NOT NULL,
+    price VARCHAR NOT NULL
+ );
