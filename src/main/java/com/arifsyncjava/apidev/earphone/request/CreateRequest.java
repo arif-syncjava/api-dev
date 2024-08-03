@@ -1,18 +1,15 @@
-package com.arifsyncjava.apidev.earphone.model;
+package com.arifsyncjava.apidev.earphone.request;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 
-@Entity
-@Table(name = "earphones")
-public class Earphone {
-    @Id
-    private Long id;
+public class CreateRequest {
+    @NotBlank (message = "unique product id required")
     private String productId;
+    @NotBlank (message = "unique product id required")
     private String model;
+    @NotBlank (message = "unique product id required")
     private String price;
-
 
     public String getProductId() {
         return productId;

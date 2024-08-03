@@ -44,8 +44,8 @@ public class BikeController {
     }
 
     @DeleteMapping(path = "/{model}")
-    public void deleteBike (@PathVariable ("model") String model) {
-        deleteBikeService.execute(model);
+    public ResponseEntity<Void> deleteBike (@PathVariable ("model") String model) {
+        return deleteBikeService.execute(model);
     }
 
 
