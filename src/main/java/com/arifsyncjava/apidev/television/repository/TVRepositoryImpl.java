@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
-@Transactional
+@Transactional (transactionManager = "televisionTransactionManager")
 @Repository
 public class TVRepositoryImpl implements TVRepository{
 

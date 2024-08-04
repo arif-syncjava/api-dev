@@ -34,6 +34,16 @@ public class PenDriveController {
         return createPenDriveService.execute(penDrive);
     }
 
+    @PutMapping
+    public ResponseEntity<PenDrive> update (@RequestBody PenDrive penDrive) {
+        return updatePenDriveService.execute(penDrive);
+    }
+
+    @DeleteMapping (path = "/{id}")
+    public ResponseEntity<Void> delete (@PathVariable String id) {
+        return deletePenDriveService.execute(id);
+    }
+
 
 
 

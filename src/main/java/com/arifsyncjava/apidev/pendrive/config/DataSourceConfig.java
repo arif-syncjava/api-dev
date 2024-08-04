@@ -1,6 +1,7 @@
 package com.arifsyncjava.apidev.pendrive.config;
 
 import jakarta.persistence.EntityManagerFactory;
+import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -23,7 +24,7 @@ import java.util.List;
 @EnableJpaRepositories (
         basePackages = "com.arifsyncjava.apidev.pendrive.repository",
         entityManagerFactoryRef = "penDriveEntityManagerFactory",
-        transactionManagerRef = "bikeTransactionManager"
+        transactionManagerRef = "penDriveTransactionManager"
 )
 @Configuration
 public class DataSourceConfig {
@@ -36,7 +37,8 @@ public class DataSourceConfig {
 
     @Bean
     DataSource  penDriveDataSource (
-            @Qualifier ("penDriveDataSourceProperties") DataSourceProperties penDriveDataSourceProperties ) {
+            @Qualifier ("penDriveDataSourceProperties")
+            DataSourceProperties penDriveDataSourceProperties ) {
         return penDriveDataSourceProperties
                 .initializeDataSourceBuilder()
                 .build();
@@ -51,13 +53,14 @@ public class DataSourceConfig {
 
         builder.setDataSource(penDriveDataSource);
         builder.setPackagesToScan("com.arifsyncjava.apidev.pendrive.model");
+        builder.setPersistenceProvider(new HibernatePersistenceProvider());
 
         return builder;
 
     }
 
     @Bean
-    PlatformTransactionManager  bikeTransactionManager (
+    PlatformTransactionManager  penDriveTransactionManager (
          @Qualifier ("penDriveEntityManagerFactory")   EntityManagerFactory penDriveEntityManagerFactory
     ) {
         return new JpaTransactionManager(penDriveEntityManagerFactory);
@@ -65,13 +68,13 @@ public class DataSourceConfig {
 
     @Bean
     NamedParameterJdbcTemplate penDriveJdbcTemplate (
-            @Qualifier ("penDriveDataSourceProperties")  DataSource penDriveDataSource ) {
+            @Qualifier ("penDriveDataSource")  DataSource penDriveDataSource ) {
         return new NamedParameterJdbcTemplate (penDriveDataSource);
     }
 
     @Bean
     DataSourceScriptDatabaseInitializer  penDriveSqlScript (
-            @Qualifier ("penDriveDataSourceProperties")  DataSource penDriveDataSource) {
+            @Qualifier ("penDriveDataSource")  DataSource penDriveDataSource) {
 
         var config = new DatabaseInitializationSettings();
         config.setMode(DatabaseInitializationMode.ALWAYS);

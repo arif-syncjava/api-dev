@@ -9,10 +9,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -67,18 +69,34 @@ public class ExceptionController {
 
 
     @ExceptionHandler (MethodArgumentNotValidException.class)
-    public ResponseEntity<Object> handleMethodArgumentNotValid(
-            MethodArgumentNotValidException exception, HttpHeaders headers,
-            HttpStatusCode statusCode, WebRequest request) {
+    public ResponseEntity<ExceptionResponse> handleMethodArgumentNotValid(
+            MethodArgumentNotValidException exception) {
         List<FieldError> fieldErrors = exception.getBindingResult().getFieldErrors();
         String fieldMessage = fieldErrors.stream()
                 .map(FieldError::getDefaultMessage)
                 .collect(Collectors.joining(", "));
         return ResponseEntity
                 .status(BAD_REQUEST)
-                .body(fieldMessage);
+                .body(new ExceptionResponse(
+                        HttpStatus.BAD_REQUEST.value(),
+                        HttpStatus.BAD_REQUEST.getReasonPhrase(),
+                        fieldMessage
+                ));
 
-    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+        }
 
 
 

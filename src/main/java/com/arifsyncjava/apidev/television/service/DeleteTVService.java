@@ -23,8 +23,8 @@ public class DeleteTVService implements Command<String, HttpResponse> {
 
     @Override
     public ResponseEntity<HttpResponse> execute(String model) {
-//        Television tv = tvRepository.getTelevisionByModel(model)
-//                .orElseThrow(()->new ProductNotFoundException("model not available"));
+     Television tv = tvRepository.getTelevisionByModel(model)
+              .orElseThrow(()->new ProductNotFoundException("model not available"));
        tvRepository.deleteTelevision(model);
         return ResponseEntity.ok(new HttpResponse(HttpStatus.OK,
                 Map.of("deleted", "true")));

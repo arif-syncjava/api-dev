@@ -1,23 +1,14 @@
 package com.arifsyncjava.apidev.earphone.request;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
 
 public class CreateRequest {
-    @NotBlank (message = "unique product id required")
-    private String productId;
-    @NotBlank (message = "unique product id required")
+    @NotBlank (message = "model required")
     private String model;
-    @NotBlank (message = "unique product id required")
+    @NotBlank (message = "price required")
     private String price;
 
-    public String getProductId() {
-        return productId;
-    }
 
-    public void setProductId(String productId) {
-        this.productId = productId;
-    }
 
     public String getModel() {
         return model;

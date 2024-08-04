@@ -1,25 +1,21 @@
 package com.arifsyncjava.apidev.earphone.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "earphones")
 public class Earphone {
-    @Id
+    @Id @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
-    private String productId;
     private String model;
     private String price;
 
-
-    public String getProductId() {
-        return productId;
+    public Long getId() {
+        return id;
     }
 
-    public void setProductId(String productId) {
-        this.productId = productId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getModel() {

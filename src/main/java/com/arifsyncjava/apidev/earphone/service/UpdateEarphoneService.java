@@ -20,10 +20,10 @@ public class UpdateEarphoneService implements Command<UpdateRequest, Earphone> {
 
     @Override
     public ResponseEntity<Earphone> execute(UpdateRequest request) {
-        Earphone earphone = earphoneRepository.findByProductId(request.getId())
+        Earphone earphone = earphoneRepository.findById(request.getId())
                 .orElseThrow(()->new ProductNotFoundException("product not available"));
 
-        earphone.setProductId(request.getId());
+        
         earphone.setModel(request.getRequestBody().getModel());
         earphone.setPrice(request.getRequestBody().getPrice());
 

@@ -19,7 +19,7 @@ public class PendriveRepositoryImpl implements PendriveRepository {
     private final PendriveJpaRepository pendriveJpaRepository;
 
     public PendriveRepositoryImpl (
-          @Qualifier ("bikeJdbcTemplate")  NamedParameterJdbcTemplate jdbcTemplate,
+          @Qualifier ("penDriveJdbcTemplate")  NamedParameterJdbcTemplate jdbcTemplate,
           PendriveJpaRepository pendriveJpaRepository) {
         this.jdbcTemplate = jdbcTemplate;
         this.pendriveJpaRepository = pendriveJpaRepository;

@@ -11,16 +11,16 @@ import org.springframework.util.AlternativeJdkIdGenerator;
 public class CreatePenDriveService  implements Command<PenDrive,PenDrive> {
 
     private final PendriveRepository pendriveRepository;
-    private final String id;
 
-    public CreatePenDriveService(PendriveRepository pendriveRepository, String id) {
+
+    public CreatePenDriveService(PendriveRepository pendriveRepository) {
         this.pendriveRepository = pendriveRepository;
-        this.id = new AlternativeJdkIdGenerator().generateId().toString();
     }
 
 
     @Override
     public ResponseEntity<PenDrive> execute(PenDrive penDrive) {
+        String id = new AlternativeJdkIdGenerator().generateId().toString();
         penDrive.setId(id);
         PenDrive savedPenDrive = pendriveRepository.save(penDrive);
         return ResponseEntity.ok(savedPenDrive);

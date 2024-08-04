@@ -2,13 +2,10 @@ package com.arifsyncjava.apidev.earphone.repository;
 
 import com.arifsyncjava.apidev.earphone.model.Earphone;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
-
+@Repository
 public interface EarphoneRepository extends JpaRepository<Earphone,Long> {
-
-
-    Optional<Earphone> findByProductId(String id);
 
 
 }

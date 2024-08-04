@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
-public class GetEarphoneService implements Command<String, Earphone> {
+public class GetEarphoneService implements Command<Long, Earphone> {
 
     private final EarphoneRepository earphoneRepository;
 
@@ -19,8 +19,8 @@ public class GetEarphoneService implements Command<String, Earphone> {
 
 
     @Override
-    public ResponseEntity<Earphone> execute(String id) {
-        Earphone earphone = earphoneRepository.findByProductId(id)
+    public ResponseEntity<Earphone> execute(Long id) {
+        Earphone earphone = earphoneRepository.findById(id)
                 .orElseThrow(()->new ProductNotFoundException("model not available"));
 
         return ResponseEntity

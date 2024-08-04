@@ -19,7 +19,7 @@ earphone:
 
 pendrive:
       database:
-            url: jdbc:postgresql://localhost:5432/earphonedb
+            url: jdbc:postgresql://localhost:5432/pendrivedb
             username: postgres
             password: 1234
 

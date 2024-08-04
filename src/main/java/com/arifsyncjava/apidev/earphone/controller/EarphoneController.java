@@ -30,7 +30,7 @@ public class EarphoneController {
     }
 
     @GetMapping (path = "/{id}")
-    public ResponseEntity<Earphone> read ( @PathVariable String id) {
+    public ResponseEntity<Earphone> read ( @PathVariable Long id) {
              return getEarphoneService.execute(id);
     }
 
@@ -41,14 +41,14 @@ public class EarphoneController {
 
     @PutMapping (path = "/{id}")
     public ResponseEntity<Earphone> update (
-            @PathVariable String id,
+            @PathVariable Long id,
             @RequestBody @Valid UpdateRequestBody request) {
-        return updateEarphoneService.execute(new UpdateRequest(id, request))
+        return updateEarphoneService.execute(new UpdateRequest(id, request));
     }
 
     @DeleteMapping (path = "/{id}")
-    public ResponseEntity<Void> delete (@PathVariable String id ) {
-
+    public ResponseEntity<Void> delete (@PathVariable Long id ) {
+        return deleteEarphoneService.execute(id);
     }
 
 
